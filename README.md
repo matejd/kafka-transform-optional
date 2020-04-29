@@ -1,23 +1,19 @@
-# MathExpression
-A Kafka Single Message Transform (SMT) that evaluates simple mathematical expressions.
+# Optional
+A Kafka Single Message Transform (SMT) that marks a field as optional (schema modification).
 
 https://kafka.apache.org/documentation/#connect_transforms
 
 ## Config
 
 SMT expects the following configuration values:
-- `expression` (see https://github.com/uklimaschewski/EvalEx, record fields can be used as variables)
-- `field.name` (evaluation result will be stored in this field)
-- `field.type` (can be used to cast evaluation result to a different type, defaults to string)
+- `field.name` (field which schema will be changed)
 
-Supported field types: `int64`, `int64?` (nullable), `float64`, `float64?`, `string` (default), `string?`.
+Schema of the configured field will be changed e.g. from `INT64` to `OPTIONAL_INT64`.
 
-Example configuration that divides field `timestamp` by 1000:
+Example configuration:
 
 ```
-"transforms": "math",
-"transforms.math.type": "com.github.matejd.kafka.connect.transform.MathExpression$Value",
-"transforms.math.expression": "timestamp / 1000",
-"transforms.math.field.name": "timestamp_seconds",
-"transforms.math.field.type": "int64?",
+"transforms": "optional",
+"transforms.optional.type": "com.github.matejd.kafka.connect.transform.Optional$Value",
+"transforms.optional.field.name": "timestamp_seconds"
 ```
