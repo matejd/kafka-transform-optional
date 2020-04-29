@@ -90,7 +90,7 @@ public abstract class Optional<R extends ConnectRecord<R>> implements Transforma
         final SchemaBuilder builder = SchemaUtil.copySchemaBasics(schema, SchemaBuilder.struct());
 
         for (Field field : schema.fields()) {
-            if (field.name() == fieldName) {
+            if (field.name().equals(fieldName)) {
                 SchemaBuilder fieldBuilder = SchemaUtil.copySchemaBasics(field.schema());
                 builder.field(fieldName, fieldBuilder.optional().build());
                 continue;
